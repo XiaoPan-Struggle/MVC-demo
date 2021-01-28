@@ -30,3 +30,9 @@ $('.movebox').on('click', () => {
 })
 
 
+let $discoloration = $('.discoloration')
+$discoloration.on('mouseenter', () => {
+  $discoloration.addClass('active')
+}).on('mouseleave', () => {
+  $discoloration.removeClass('active')
+})
