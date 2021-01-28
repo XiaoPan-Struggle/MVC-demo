@@ -52,3 +52,19 @@ ol li.active {
 .movebox.active{
   transform: translateX(20vw);
 }
+
+.discoloration{
+  width: 100%;
+  height: 100%;
+}
+.discoloration.active{
+  animation: variety 1s infinite linear alternate;
+}
+@keyframes variety {
+  0%{
+    background-color: red;
+  }
+  100%{
+    background-color: blue;
+  }
+}
