@@ -1,32 +1,53 @@
 let screen = $('.screen')
-let num = parseInt(screen.text())
+let num = localStorage.getItem('operating-num') || 100
+num = parseInt(num)
+console.log(typeof num)
+screen.text(num)
+const local = (setnum) => {
+  localStorage.setItem('operating-num', setnum)
+}
 $('.addNum').on('click', () => {
-  screen.text(num += 1)
+  local(num += 1)
+  screen.text(num)
 })
 $('.lessNum').on('click', () => {
-  screen.text(num -= 1)
+  local(num -= 1)
+  screen.text(num)
 })
 $('.multiplyNum').on('click', () => {
-  screen.text(num *= 2)
+  local(num *= 2)
+  screen.text(num)
 })
 $('.exceptNum').on('click', () => {
-  screen.text(num /= 2)
+  local(num /= 2)
+  screen.text(num)
 })
 
 
 let $ol = $('ol')
 let $content = $('.content')
+const index = localStorage.getItem('show-index') || 0
 $ol.on('click', 'li', e => {
   const $li = $(e.currentTarget)
   $li.addClass('active').siblings().removeClass('active')
   const index = $li.index()
+  localStorage.setItem('show-index', index)
   $content.eq(index).addClass('show').siblings().removeClass('show')
 })
-$ol.children().eq(0).trigger('click')
+$ol.children().eq(index).trigger('click')
 
 
-$('.movebox').on('click', () => {
-  $('.movebox').toggleClass('active')
+let $movebox = $('.movebox')
+let active = localStorage.getItem('stateMove') === 'yes'
+$movebox.toggleClass('active', active)
+$movebox.on('click', () => {
+  if ($movebox.hasClass('active')) {
+    $movebox.removeClass('active')
+    localStorage.setItem('stateMove', 'no')
+  } else {
+    $movebox.addClass('active')
+    localStorage.setItem('stateMove', 'yes')
+  }
 })
 
 
