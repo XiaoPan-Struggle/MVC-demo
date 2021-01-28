@@ -19,3 +19,25 @@
   font-size: 26px;
   font-weight: 600;
 }
+ol{
+  list-style: none;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+ol li {
+  width: 50vw;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  font-size: 24px;
+}
+ol li.active {
+  background-color: #999;
+}
+.content {
+  font-size: 40px;
+  font-weight: 800;
+}
+.show{
+  display: none;
+}
