@@ -35,9 +35,10 @@ ol li.active {
   background-color: #999;
 }
 .content {
+  display: none;
   font-size: 40px;
   font-weight: 800;
 }
 .show{
-  display: none;
+  display: block;
 }

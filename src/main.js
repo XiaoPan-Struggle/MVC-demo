@@ -12,3 +12,16 @@ $('.multiplyNum').on('click', () => {
 $('.exceptNum').on('click', () => {
   screen.text(num /= 2)
 })
+
+
+let $ol = $('ol')
+let $content = $('.content')
+$ol.on('click', 'li', e => {
+  const $li = $(e.currentTarget)
+  $li.addClass('active').siblings().removeClass('active')
+  const index = $li.index()
+  $content.eq(index).addClass('show').siblings().removeClass('show')
+})
+$ol.children().eq(0).trigger('click')
+
+
