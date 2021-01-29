@@ -1,27 +1,43 @@
-let screen = $('.screen')
-let num = localStorage.getItem('operating-num') || 100
-num = parseInt(num)
-console.log(typeof num)
-screen.text(num)
-const local = (setnum) => {
-  localStorage.setItem('operating-num', setnum)
+const globalObj = {
+  init () {
+    globalObj.screen.text(globalObj.num)
+    globalObj.bindEvents()
+  },
+  screen: $('.screen'),
+  num: parseFloat(localStorage.getItem('operating-num') || 100),
+  hashEvents: {
+    '.addNum': 'addNumFn',
+    '.lessNum': 'lessNumFn',
+    '.multiplyNum': 'multiplyNumFn',
+    '.exceptNum': 'exceptNumFn',
+  },
+  methods: {
+    local (result) {
+      globalObj.screen.text(result)
+      localStorage.setItem('operating-num', result)
+    },
+    addNumFn () {
+      globalObj.methods.local(globalObj.num += 1)
+    },
+    lessNumFn () {
+      globalObj.methods.local(globalObj.num -= 1)
+    },
+    multiplyNumFn () {
+      globalObj.methods.local(globalObj.num *= 2)
+    },
+    exceptNumFn () {
+      globalObj.methods.local(globalObj.num /= 2)
+    }
+  },
+  bindEvents () {
+    for (let key in globalObj.hashEvents) {
+      console.log(key)
+      $(key).on('click', globalObj.methods[globalObj.hashEvents[key]])
+    }
+  }
 }
-$('.addNum').on('click', () => {
-  local(num += 1)
-  screen.text(num)
-})
-$('.lessNum').on('click', () => {
-  local(num -= 1)
-  screen.text(num)
-})
-$('.multiplyNum').on('click', () => {
-  local(num *= 2)
-  screen.text(num)
-})
-$('.exceptNum').on('click', () => {
-  local(num /= 2)
-  screen.text(num)
-})
+globalObj.init()
+
 
 
 let $ol = $('ol')
