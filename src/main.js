@@ -1,7 +1,7 @@
-const globalObj = {
+const featuresOne = {
   init () {
-    globalObj.screen.text(globalObj.num)
-    globalObj.bindEvents()
+    featuresOne.screen.text(featuresOne.num)
+    featuresOne.bindEvents()
   },
   screen: $('.screen'),
   num: parseFloat(localStorage.getItem('operating-num') || 100),
@@ -13,44 +13,61 @@ const globalObj = {
   },
   methods: {
     local (result) {
-      globalObj.screen.text(result)
+      featuresOne.screen.text(result)
       localStorage.setItem('operating-num', result)
     },
     addNumFn () {
-      globalObj.methods.local(globalObj.num += 1)
+      featuresOne.methods.local(featuresOne.num += 1)
     },
     lessNumFn () {
-      globalObj.methods.local(globalObj.num -= 1)
+      featuresOne.methods.local(featuresOne.num -= 1)
     },
     multiplyNumFn () {
-      globalObj.methods.local(globalObj.num *= 2)
+      featuresOne.methods.local(featuresOne.num *= 2)
     },
     exceptNumFn () {
-      globalObj.methods.local(globalObj.num /= 2)
+      featuresOne.methods.local(featuresOne.num /= 2)
     }
   },
   bindEvents () {
-    for (let key in globalObj.hashEvents) {
+    for (let key in featuresOne.hashEvents) {
       console.log(key)
-      $(key).on('click', globalObj.methods[globalObj.hashEvents[key]])
+      $(key).on('click', featuresOne.methods[featuresOne.hashEvents[key]])
     }
   }
 }
-globalObj.init()
+featuresOne.init()
 
 
 
-let $ol = $('ol')
-let $content = $('.content')
-const index = localStorage.getItem('show-index') || 0
-$ol.on('click', 'li', e => {
-  const $li = $(e.currentTarget)
-  $li.addClass('active').siblings().removeClass('active')
-  const index = $li.index()
-  localStorage.setItem('show-index', index)
-  $content.eq(index).addClass('show').siblings().removeClass('show')
-})
-$ol.children().eq(index).trigger('click')
+const featuresTwo = {
+  index: localStorage.getItem('show-index') || 0,
+  ui: {
+    $ol: $('ol'),
+    $content: $('.content'),
+    $li: undefined
+  },
+  init () {
+    featuresTwo.bindEvents()
+  },
+  bindEvents () {
+    featuresTwo.ui.$ol.on('click', 'li', e => {
+      featuresTwo.showIndex(e.currentTarget)
+    })
+    featuresTwo.ui.$ol.children().eq(featuresTwo.index).trigger('click')
+  },
+  setIndex (index) {
+    localStorage.setItem('show-index', index)
+    featuresTwo.ui.$content.eq(index).addClass('show').siblings().removeClass('show')
+  },
+  showIndex (currentTarget) {
+    featuresTwo.ui.$li = $(currentTarget)
+    featuresTwo.ui.$li.addClass('active').siblings().removeClass('active')
+    featuresTwo.setIndex(featuresTwo.ui.$li.index())
+  }
+}
+featuresTwo.init()
+
 
 
 let $movebox = $('.movebox')
