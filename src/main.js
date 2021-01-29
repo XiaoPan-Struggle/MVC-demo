@@ -70,18 +70,25 @@ featuresTwo.init()
 
 
 
+let featuresThree = {
+
+}
 let $movebox = $('.movebox')
 let active = localStorage.getItem('stateMove') === 'yes'
+const localState = (state) => {
+  localStorage.setItem('stateMove', state)
+}
 $movebox.toggleClass('active', active)
 $movebox.on('click', () => {
   if ($movebox.hasClass('active')) {
     $movebox.removeClass('active')
-    localStorage.setItem('stateMove', 'no')
+    localState('no')
   } else {
     $movebox.addClass('active')
-    localStorage.setItem('stateMove', 'yes')
+    localState('yes')
   }
 })
+
 
 
 let $discoloration = $('.discoloration')
